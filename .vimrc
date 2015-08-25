@@ -16,11 +16,12 @@ filetype off
 set matchpairs& matchpairs+=<:>
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 
-
+" NeoBundleを初期化
 if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle/'))
+        set rtp+=$HOME/.vim/bundle/neobundle.vim/
 endif
+call neobundle#begin(expand('~/.vim/bundle'))
+NeoBundleFetch 'Shougo/neobundle.vim'
 " originalrepos on github
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc'
@@ -36,13 +37,13 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'Lokaltog/powerline-fontpatcher'
 NeoBundle 'Lokaltog/powerline', {'rtp' : 'powerline/bindings/vim'}
 " Vimで正しくvirtualenvを処理できるようにする
+call neobundle#end()
 
 "neocomplcacheの設定"
 filetype plugin indent on     " required!
 filetype indent on
 syntax on
-""Disable AutoComplPop.
-"let g:acp_enableAtStartup = 0
+
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
 " Use smartcase.
@@ -62,22 +63,19 @@ let g:neocomplcache_dictionary_filetype_lists = {
 " python powerline_setup()
 " python del powerline_setup
 set laststatus=2
-" set showtabline=2
+set t_Co=254
+set showtabline=2
 " set noshowmode
 
-"let g:Powerline_symbols = 'fancy'
-"let g:Powerline_dividers_override = ['>>', '>', '<<', '<']
-"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+let g:Powerline_symbols = 'fancy'
+let g:Powerline_dividers_override = ['>>', '>', '<<', '<']
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
 let g:syntastic_mode_map = { 'mode': 'passive' }
 augroup AutoSyntastic
 	autocmd!
 	autocmd BufWritePost *.c,*.cpp,*.js,*.py,*.rb call s:syntastic()
 augroup END
-function! s:syntastic()
-	SyntasticCheck
-	call lightline#update()
-endfunction
-
 function! MyModified()
 	return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -164,3 +162,5 @@ set noshowmode
 "	        \ "*": {"runner": "remote/vimproc"},
 "	        \ }
 "endfunction
+" NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
+NeoBundleCheck
