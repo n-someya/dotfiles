@@ -16,6 +16,13 @@ filetype off
 set matchpairs& matchpairs+=<:>
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 
+" vimdiffの色設定
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
+
+
 " NeoBundleを初期化
 if has('vim_starting')
         set rtp+=$HOME/.vim/bundle/neobundle.vim/
@@ -23,7 +30,6 @@ endif
 call neobundle#begin(expand('~/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " originalrepos on github
-NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
