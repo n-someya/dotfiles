@@ -42,6 +42,7 @@ NeoBundle 'alpaca-tc/alpaca_powertabline'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'Lokaltog/powerline-fontpatcher'
 NeoBundle 'Lokaltog/powerline', {'rtp' : 'powerline/bindings/vim'}
+NeoBundle 'davidhalter/jedi-vim'
 " Vimで正しくvirtualenvを処理できるようにする
 call neobundle#end()
 
@@ -82,6 +83,11 @@ augroup AutoSyntastic
 	autocmd!
 	autocmd BufWritePost *.c,*.cpp,*.js,*.py,*.rb call s:syntastic()
 augroup END
+function! s:syntastic()
+    SyntasticCheck
+"   call lightline#update()
+endfunction
+
 function! MyModified()
 	return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -149,9 +155,12 @@ inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
 "vimfilerの設定
 let g:vimfiler_as_default_explorer = 1
 command Vfe :VimFilerExplore
+
+
 " 自分用 snippet ファイルの場所
 " let s:my_snippet = '~/snippet/'
 " let g:neosnippet#snippets_directory = s:my_snippet
@@ -168,5 +177,19 @@ set noshowmode
 "	        \ "*": {"runner": "remote/vimproc"},
 "	        \ }
 "endfunction
+" rename用のマッピングを無効にしたため、代わりにコマンドを定義
+ command! -nargs=0 JediRename :call jedi#rename()
+"
+" " pythonのrename用のマッピングがquickrunとかぶるため回避させる
+let g:jedi#rename_command = ""
+let  g:jedi#documentation_command = "K"
+
+" Unite
+nnoremap [unite]    <Nop>
+nmap     <Space>u [unite]
+
+nnoremap <silent> [unite]c   :<C-u>UniteWithCurrentDir -buffer-name=files buffer bookmark file<CR>
+nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
+
 " NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
 NeoBundleCheck
