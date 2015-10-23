@@ -43,6 +43,9 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'Lokaltog/powerline-fontpatcher'
 NeoBundle 'Lokaltog/powerline', {'rtp' : 'powerline/bindings/vim'}
 NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'taka84u9/vim-ref-ri'
+
 " Vimで正しくvirtualenvを処理できるようにする
 call neobundle#end()
 
@@ -182,7 +185,7 @@ set noshowmode
 "
 " " pythonのrename用のマッピングがquickrunとかぶるため回避させる
 let g:jedi#rename_command = ""
-let  g:jedi#documentation_command = "K"
+let  g:jedi#documentation_command = "P"
 
 " Unite
 nnoremap [unite]    <Nop>
