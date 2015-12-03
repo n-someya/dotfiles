@@ -198,7 +198,6 @@ prompt_segment() {
   CURRENT_BG=$1
   [[ -n $3 ]] && echo -n $3
 }
-
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
@@ -222,16 +221,28 @@ prompt_context() {
   fi
 }
 
+prompt_time() {
+    prompt_segment magenta black "%D{%T}"
+}
+
 # Git: branch/detached head, dirty status
 prompt_git() {
   local ref dirty
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
-    dirty=$(parse_git_dirty)
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
-    if [[ -n $dirty ]]; then
-      prompt_segment yellow black
+    pwd | grep "/home/someya/work/remote" > /dev/null 2>&1
+    is_remote=$?
+    if [ ${is_remote} -ne 0 ] ; then
+      dirty=$(parse_git_dirty)
+      ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
+      if [[ -n $dirty ]]; then
+        prompt_segment yellow black
+      else
+        prompt_segment green black
+      fi
     else
-      prompt_segment green black
+      dirty=
+      ref=$(git symbolic-ref HEAD 2> /dev/null)
+      prompt_segment cyan black
     fi
 
     setopt promptsubst
@@ -244,7 +255,9 @@ prompt_git() {
     zstyle ':vcs_info:git:*' unstagedstr '●'
     zstyle ':vcs_info:*' formats ' %u%c'
     zstyle ':vcs_info:*' actionformats ' %u%c'
-    vcs_info
+    if [ ${is_remote} -ne 0 ] ; then
+      vcs_info
+    fi
     echo -n "${ref/refs\/heads\//⭠ }${vcs_info_msg_0_%% }"
   fi
 }
@@ -287,6 +300,10 @@ prompt_hg() {
 # Dir: current working directory
 prompt_dir() {
   prompt_segment blue black '%~'
+#COLOR_FG="%{[38;5;000m%}"      # 表を赤に
+#COLOR_BG="%{[30;48;5;196m%}"   # 背景を緑に
+#COLOR_END="%{[0m%}"            # 色を元に戻す
+#echo -n "%{$bg%F{$CURRENT_BG}%}${COLOR_BG}${COLOR_FG}%~${COLOR_END}"
 }
 
 # Virtualenv: current working virtualenv
@@ -316,6 +333,7 @@ build_prompt() {
   RETVAL=$?
   prompt_status
   prompt_virtualenv
+  prompt_time
   prompt_context
   prompt_dir
   prompt_git
