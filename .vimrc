@@ -193,6 +193,7 @@ nmap     <Space>u [unite]
 
 nnoremap <silent> [unite]c   :<C-u>UniteWithCurrentDir -buffer-name=files buffer bookmark file<CR>
 nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]g   :<C-u>Unite grep -buffer-name=search-buffer<CR>
 
 " NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
 NeoBundleCheck
