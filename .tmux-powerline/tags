@@ -1,0 +1,145 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CC	segments/Makefile	/^CC = $(shell hash clang 2>\/dev\/null && echo clang || echo gcc)$/;"	m
+CFLAGS	segments/Makefile	/^CFLAGS = -O3 -Wall -std=c99 -I \/usr\/include\/ -D DEBUG=${DEBUG}$/;"	m
+DEBUG	segments/Makefile	/^DEBUG=0$/;"	m
+DEBUG_PRINTF	segments/np_mpd.c	12;"	d	file:
+DEBUG_PRINTF	segments/xkb_layout.c	17;"	d	file:
+DO_DEBUG	segments/np_mpd.c	10;"	d	file:
+DO_DEBUG	segments/np_mpd.c	8;"	d	file:
+DO_DEBUG	segments/xkb_layout.c	13;"	d	file:
+DO_DEBUG	segments/xkb_layout.c	15;"	d	file:
+LDLIBS	segments/Makefile	/^LDLIBS = -lmpdclient$/;"	m
+XKB_LAYOUT_LDLIBS	segments/Makefile	/^XKB_LAYOUT_LDLIBS= -lX11$/;"	m
+__battery_linux	segments/battery.sh	/^	__battery_linux() {$/;"	f
+__battery_osx	segments/battery.sh	/^__battery_osx() {$/;"	f
+__check_alert_time_window	segments/earthquake.sh	/^__check_alert_time_window() {$/;"	f
+__check_min_magnitude	segments/earthquake.sh	/^__check_min_magnitude() {$/;"	f
+__check_platform	lib/powerline.sh	/^__check_platform() {$/;"	f
+__convert_jp_magnitude	segments/earthquake.sh	/^__convert_jp_magnitude() {$/;"	f
+__convert_jp_timestamp	segments/earthquake.sh	/^__convert_jp_timestamp() {$/;"	f
+__convert_timestamp_to_fmt	segments/earthquake.sh	/^__convert_timestamp_to_fmt() {$/;"	f
+__count_apple_mail	segments/mailcount.sh	/^__count_apple_mail() {$/;"	f
+__count_gmail	segments/mailcount.sh	/^__count_gmail() {$/;"	f
+__count_mailcheck	segments/mailcount.sh	/^__count_mailcheck() {$/;"	f
+__count_maildir	segments/mailcount.sh	/^__count_maildir() {$/;"	f
+__count_mbox	segments/mailcount.sh	/^__count_mbox() {$/;"	f
+__cutinate	segments/battery.sh	/^	__cutinate() {$/;"	f
+__freebsd_get_bat	segments/battery.sh	/^	__freebsd_get_bat() {$/;"	f
+__get_condition_symbol	segments/weather.sh	/^__get_condition_symbol() {$/;"	f
+__goo_earthquake	segments/earthquake.sh	/^__goo_earthquake() {$/;"	f
+__linux_get_bat	segments/battery.sh	/^	__linux_get_bat() {$/;"	f
+__mac_keychain_get_pass	segments/mailcount.sh	/^__mac_keychain_get_pass() {$/;"	f
+__np_audacious	segments/now_playing.sh	/^__np_audacious() {$/;"	f
+__np_banshee	segments/now_playing.sh	/^__np_banshee() {$/;"	f
+__np_cmus	segments/now_playing.sh	/^__np_cmus() {$/;"	f
+__np_itunes	segments/now_playing.sh	/^__np_itunes() {$/;"	f
+__np_lastfm	segments/now_playing.sh	/^__np_lastfm() {$/;"	f
+__np_mocp	segments/now_playing.sh	/^__np_mocp() {$/;"	f
+__np_mpd	segments/now_playing.sh	/^__np_mpd() {$/;"	f
+__np_mpd_simple	segments/now_playing.sh	/^__np_mpd_simple() {$/;"	f
+__np_pithos	segments/now_playing.sh	/^__np_pithos() {$/;"	f
+__np_rdio	segments/now_playing.sh	/^__np_rdio() {$/;"	f
+__np_rhythmbox	segments/now_playing.sh	/^__np_rhythmbox() {$/;"	f
+__np_spotify	segments/now_playing.sh	/^__np_spotify() {$/;"	f
+__np_spotify_wine	segments/now_playing.sh	/^__np_spotify_wine() {$/;"	f
+__parse_git_branch	segments/vcs_branch.sh	/^__parse_git_branch() {$/;"	f
+__parse_git_stats	segments/vcs_compare.sh	/^__parse_git_stats() {$/;"	f
+__parse_git_stats	segments/vcs_modified.sh	/^__parse_git_stats(){$/;"	f
+__parse_git_stats	segments/vcs_others.sh	/^__parse_git_stats(){$/;"	f
+__parse_git_stats	segments/vcs_staged.sh	/^__parse_git_stats(){$/;"	f
+__parse_hg_branch	segments/vcs_branch.sh	/^__parse_hg_branch() {$/;"	f
+__parse_hg_stats	segments/vcs_compare.sh	/^__parse_hg_stats() {$/;"	f
+__parse_hg_stats	segments/vcs_modified.sh	/^__parse_hg_stats(){$/;"	f
+__parse_hg_stats	segments/vcs_others.sh	/^__parse_hg_stats(){$/;"	f
+__parse_hg_stats	segments/vcs_revision.sh	/^__parse_hg_stats(){$/;"	f
+__parse_hg_stats	segments/vcs_staged.sh	/^__parse_hg_stats(){$/;"	f
+__parse_svn_branch	segments/vcs_branch.sh	/^__parse_svn_branch() {$/;"	f
+__parse_svn_stats	segments/vcs_compare.sh	/^__parse_svn_stats() {$/;"	f
+__parse_svn_stats	segments/vcs_modified.sh	/^__parse_svn_stats() {$/;"	f
+__parse_svn_stats	segments/vcs_others.sh	/^__parse_svn_stats(){$/;"	f
+__parse_svn_stats	segments/vcs_revision.sh	/^__parse_svn_stats(){$/;"	f
+__parse_svn_stats	segments/vcs_staged.sh	/^__parse_svn_stats(){$/;"	f
+__powerline_mute_file	lib/muting.sh	/^__powerline_mute_file() {$/;"	f
+__print_colored_content	lib/formatting.sh	/^__print_colored_content() {$/;"	f
+__print_left_segment	lib/powerline.sh	/^__print_left_segment() {$/;"	f
+__print_right_segment	lib/powerline.sh	/^__print_right_segment() {$/;"	f
+__process_colors	lib/powerline.sh	/^__process_colors() {$/;"	f
+__process_powerline	lib/powerline.sh	/^__process_powerline() {$/;"	f
+__process_scripts	lib/powerline.sh	/^__process_scripts() {$/;"	f
+__process_segment_defaults	lib/powerline.sh	/^__process_segment_defaults() {$/;"	f
+__process_settings	segments/battery.sh	/^__process_settings() {$/;"	f
+__process_settings	segments/date.sh	/^__process_settings() {$/;"	f
+__process_settings	segments/earthquake.sh	/^__process_settings() {$/;"	f
+__process_settings	segments/hostname.sh	/^__process_settings() {$/;"	f
+__process_settings	segments/mailcount.sh	/^__process_settings() {$/;"	f
+__process_settings	segments/now_playing.sh	/^__process_settings() {$/;"	f
+__process_settings	segments/pwd.sh	/^__process_settings() {$/;"	f
+__process_settings	segments/time.sh	/^__process_settings() {$/;"	f
+__process_settings	segments/weather.sh	/^__process_settings() {$/;"	f
+__read_rcfile	lib/rcfile.sh	/^__read_rcfile() {$/;"	f
+__read_tmp_file	segments/earthquake.sh	/^__read_tmp_file() {$/;"	f
+__read_tmp_file	segments/weather.sh	/^__read_tmp_file() {$/;"	f
+__segment_separator_is_thin	lib/powerline.sh	/^__segment_separator_is_thin() {$/;"	f
+__yahoo_weather	segments/weather.sh	/^__yahoo_weather() {$/;"	f
+check_arg_side	lib/arg_processing.sh	/^check_arg_side() {$/;"	f
+dbus	segments/np_pithos.py	/^import dbus$/;"	i
+debug_mode_enabled	config/helpers.sh	/^debug_mode_enabled() {$/;"	f
+generate_default_rc	lib/rcfile.sh	/^generate_default_rc() {$/;"	f
+generate_segmentrc	segments/battery.sh	/^generate_segmentrc() {$/;"	f
+generate_segmentrc	segments/date.sh	/^generate_segmentrc() {$/;"	f
+generate_segmentrc	segments/earthquake.sh	/^generate_segmentrc() {$/;"	f
+generate_segmentrc	segments/hostname.sh	/^generate_segmentrc() {$/;"	f
+generate_segmentrc	segments/mailcount.sh	/^generate_segmentrc() {$/;"	f
+generate_segmentrc	segments/now_playing.sh	/^generate_segmentrc() {$/;"	f
+generate_segmentrc	segments/pwd.sh	/^generate_segmentrc() {$/;"	f
+generate_segmentrc	segments/time.sh	/^generate_segmentrc() {$/;"	f
+generate_segmentrc	segments/weather.sh	/^generate_segmentrc() {$/;"	f
+get_tmux_cwd	lib/tmux_adapter.sh	/^get_tmux_cwd() {$/;"	f
+main	segments/np_mpd.c	/^int main(int argc, const char *argv[])$/;"	f
+main	segments/xkb_layout.c	/^int main() {$/;"	f
+ostype	config/shell.sh	/^ostype() { echo $OSTYPE | tr '[A-Z]' '[a-z]'; }$/;"	f
+patched_font_in_use	config/helpers.sh	/^patched_font_in_use() {$/;"	f
+pithos	segments/np_pithos.py	/^pithos = pithos_bus.get_object('net.kevinmehall.Pithos', '\/net\/kevinmehall\/Pithos')$/;"	v
+pithos_bus	segments/np_pithos.py	/^pithos_bus = dbus.SessionBus()$/;"	v
+powerline_muted	lib/muting.sh	/^powerline_muted() {$/;"	f
+print_powerline	lib/powerline.sh	/^print_powerline() {$/;"	f
+process_settings	lib/rcfile.sh	/^process_settings() {$/;"	f
+props	segments/np_pithos.py	/^props = pithos.get_dbus_method('GetCurrentSong', 'net.kevinmehall.Pithos')$/;"	v
+roll_text	lib/text_roll.sh	/^roll_text() {$/;"	f
+run_segment	segments/battery.sh	/^run_segment() {$/;"	f
+run_segment	segments/cpu.sh	/^run_segment() {$/;"	f
+run_segment	segments/date.sh	/^run_segment() {$/;"	f
+run_segment	segments/date_day.sh	/^run_segment() {$/;"	f
+run_segment	segments/earthquake.sh	/^run_segment() {$/;"	f
+run_segment	segments/hostname.sh	/^run_segment() {$/;"	f
+run_segment	segments/ifstat.sh	/^run_segment() {$/;"	f
+run_segment	segments/ifstat_sys.sh	/^run_segment() {$/;"	f
+run_segment	segments/lan_ip.sh	/^run_segment() {$/;"	f
+run_segment	segments/load.sh	/^run_segment() {$/;"	f
+run_segment	segments/mailcount.sh	/^run_segment() {$/;"	f
+run_segment	segments/now_playing.sh	/^run_segment() {$/;"	f
+run_segment	segments/pwd.sh	/^run_segment() {$/;"	f
+run_segment	segments/rainbarf.sh	/^run_segment() {$/;"	f
+run_segment	segments/time.sh	/^run_segment() {$/;"	f
+run_segment	segments/tmux_mem_cpu_load.sh	/^run_segment() {$/;"	f
+run_segment	segments/tmux_session_info.sh	/^run_segment() {$/;"	f
+run_segment	segments/uptime.sh	/^run_segment() {$/;"	f
+run_segment	segments/utc_time.sh	/^run_segment() {$/;"	f
+run_segment	segments/vcs_branch.sh	/^run_segment() {$/;"	f
+run_segment	segments/vcs_compare.sh	/^run_segment() {$/;"	f
+run_segment	segments/vcs_modified.sh	/^run_segment() {$/;"	f
+run_segment	segments/vcs_others.sh	/^run_segment() {$/;"	f
+run_segment	segments/vcs_revision.sh	/^run_segment() {$/;"	f
+run_segment	segments/vcs_staged.sh	/^run_segment() {$/;"	f
+run_segment	segments/wan_ip.sh	/^run_segment() {$/;"	f
+run_segment	segments/weather.sh	/^run_segment() {$/;"	f
+run_segment	segments/xkb_layout.sh	/^run_segment() {$/;"	f
+shell_is_bsd	config/shell.sh	/^shell_is_bsd()   { [[ $SHELL_PLATFORM == 'bsd' || $SHELL_PLATFORM == 'osx' ]]; }$/;"	f
+shell_is_linux	config/shell.sh	/^shell_is_linux() { [[ $SHELL_PLATFORM == 'linux' || $SHELL_PLATFORM == 'bsd' ]]; }$/;"	f
+shell_is_osx	config/shell.sh	/^shell_is_osx()   { [[ $SHELL_PLATFORM == 'osx' ]]; }$/;"	f
+toggle_powerline_mute_status	lib/muting.sh	/^toggle_powerline_mute_status() {$/;"	f
