@@ -196,14 +196,31 @@ nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]g   :<C-u>Unite grep -buffer-name=search-buffer<CR>
 
 " バイナリファイル編集時の設定
-augroup BinaryXXD
-  autocmd!
-  autocmd BufReadPre  *.bin let &binary =1
-  autocmd BufReadPost * if &binary | silent %!xxd -g 1
-  autocmd BufReadPost * set ft=xxd | endif
-  autocmd BufWritePre * if &binary | %!xxd -r | endif
-  autocmd BufWritePost * if &binary | silent %!xxd -g 1
-  autocmd BufWritePost * set nomod | endif
+augroup Binary
+    autocmd!
+    autocmd BufReadPre  *.bin let &binary = 1
+    autocmd BufReadPost * call BinReadPost()
+    autocmd BufWritePre * call BinWritePre()
+    autocmd BufWritePost * call BinWritePost()
+    function! BinReadPost()
+        if &binary
+            silent %!xxd -g1
+            set ft=xxd
+        endif
+    endfunction
+    function! BinWritePre()
+        if &binary
+            let s:saved_pos = getpos( '.' )
+            silent %!xxd -r
+        endif
+    endfunction
+    function! BinWritePost()
+        if &binary
+            silent %!xxd -g1
+            call setpos( '.', s:saved_pos )
+            set nomod
+        endif
+    endfunction
 augroup END
 " NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
 NeoBundleCheck
