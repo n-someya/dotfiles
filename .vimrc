@@ -212,3 +212,32 @@ let g:ref_source_webdict_sites = {
             \ 'wikipedia:ja': 'http://jp.wikipedia.org/wiki/%s'
             \ }
 
+" バイナリファイル編集時の設定
+augroup Binary
+    autocmd!
+    autocmd BufReadPre  *.bin let &binary = 1
+    autocmd BufReadPost * call BinReadPost()
+    autocmd BufWritePre * call BinWritePre()
+    autocmd BufWritePost * call BinWritePost()
+    function! BinReadPost()
+        if &binary
+            silent %!xxd -g1
+            set ft=xxd
+        endif
+    endfunction
+    function! BinWritePre()
+        if &binary
+            let s:saved_pos = getpos( '.' )
+            silent %!xxd -r
+        endif
+    endfunction
+    function! BinWritePost()
+        if &binary
+            silent %!xxd -g1
+            call setpos( '.', s:saved_pos )
+            set nomod
+        endif
+    endfunction
+augroup END
+" NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
+NeoBundleCheck
