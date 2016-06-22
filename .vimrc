@@ -22,32 +22,46 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
 
+" ## dein.vim ## 
+" プラグインが実際にインストールされるディレクトリ
+let s:dein_dir = expand('~/.cache/dein')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-" NeoBundleを初期化
-if has('vim_starting')
-        set rtp+=$HOME/.vim/bundle/neobundle.vim/
+set rtp+=~/.cache/dein/repos/github.com/Lokaltog/powerline/powerline/bindings/vim
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
-call neobundle#begin(expand('~/.vim/bundle'))
-NeoBundleFetch 'Shougo/neobundle.vim'
-" originalrepos on github
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'alpaca-tc/alpaca_powertabline'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'Lokaltog/powerline-fontpatcher'
-NeoBundle 'Lokaltog/powerline', {'rtp' : 'powerline/bindings/vim'}
-NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'taka84u9/vim-ref-ri'
 
-" Vimで正しくvirtualenvを処理できるようにする
-call neobundle#end()
+" 設定開始
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  " プラグインリストを収めた TOML ファイル
+  " 予め TOML ファイル（後述）を用意しておく
+  let g:rc_dir    = expand('~/.vim/rc')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+  " TOML を読み込み、キャッシュしておく
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+
+  " 設定終了
+  call dein#end()
+  call dein#save_state()
+endif
+
+
+" もし、未インストールものものがあったらインストール
+if dein#check_install()
+  call dein#install()
+endif
+
 
 "neocomplcacheの設定"
 filetype plugin indent on     " required!
@@ -69,19 +83,19 @@ let g:neocomplcache_dictionary_filetype_lists = {
 			\ }
 " powerlineの設定
 " Powerline
-" python from powerline.vim import setup as powerline_setup
-" python powerline_setup()
-" python del powerline_setup
-set laststatus=2
-set t_Co=254
-set showtabline=2
-" set noshowmode
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
 
+set laststatus=2
+set showtabline=2
+set noshowmode
 let g:Powerline_symbols = 'fancy'
-let g:Powerline_dividers_override = ['>>', '>', '<<', '<']
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+set t_Co=256
+let g:Powerline_dividers_override = ['>>', '⮀', '<<', '<']
 
 let g:syntastic_mode_map = { 'mode': 'passive' }
+let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 augroup AutoSyntastic
 	autocmd!
 	autocmd BufWritePost *.c,*.cpp,*.js,*.py,*.rb call s:syntastic()
@@ -162,11 +176,11 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 "vimfilerの設定
 let g:vimfiler_as_default_explorer = 1
 command Vfe :VimFilerExplore
+let g:vimfiler_edit_action = 'tabopen'
 
-
+" neosnippet の設定
 " 自分用 snippet ファイルの場所
-" let s:my_snippet = '~/snippet/'
-" let g:neosnippet#snippets_directory = s:my_snippet
+let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/'
 
 hi Pmenu ctermbg=4
 hi PmenuSel ctermbg=1
@@ -174,12 +188,6 @@ hi PMenuSbar ctermbg=4
 hi Comment ctermfg=2
 set laststatus=2
 set noshowmode
-"let s:hooks = neobundle#get_hooks("vim-quickrun")
-"function! s:hooks.on_source(bundle)
-"	  let g:quickrun_config = {
-"	        \ "*": {"runner": "remote/vimproc"},
-"	        \ }
-"endfunction
 " rename用のマッピングを無効にしたため、代わりにコマンドを定義
  command! -nargs=0 JediRename :call jedi#rename()
 "
@@ -195,5 +203,12 @@ nnoremap <silent> [unite]c   :<C-u>UniteWithCurrentDir -buffer-name=files buffer
 nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]g   :<C-u>Unite grep -buffer-name=search-buffer<CR>
 
-" NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
-NeoBundleCheck
+"vim-ref
+"Ref webdictでalcを使う設定
+let g:ref_source_webdict_cmd = 'lynx -dump -pauth=''someya.naoki@jp.fujitsu.com'':7088850600 %s'
+"let g:ref_source_webdict_use_cache = 1
+let g:ref_source_webdict_sites = {
+            \ 'alc' : 'http://eow.alc.co.jp',
+            \ 'wikipedia:ja': 'http://jp.wikipedia.org/wiki/%s'
+            \ }
+
