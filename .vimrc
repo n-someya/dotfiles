@@ -176,7 +176,7 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 "vimfilerの設定
 let g:vimfiler_as_default_explorer = 1
 command Vfe :VimFilerExplore
-let g:vimfiler_edit_action = 'tabopen'
+"let g:vimfiler_edit_action = 'tabopen'
 
 " neosnippet の設定
 " 自分用 snippet ファイルの場所
@@ -203,6 +203,13 @@ nnoremap <silent> [unite]c   :<C-u>UniteWithCurrentDir -buffer-name=files buffer
 nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]g   :<C-u>Unite grep -buffer-name=search-buffer<CR>
 
+" Gundo
+nnoremap [gundo]    <Nop>
+nmap     <Space>g [gundo]
+
+nnoremap <silent> [gundo]t :<C-u>GundoToggle<CR>
+
+
 "vim-ref
 "Ref webdictでalcを使う設定
 let g:ref_source_webdict_cmd = 'lynx -dump -pauth=''someya.naoki@jp.fujitsu.com'':7088850600 %s'
@@ -212,32 +219,11 @@ let g:ref_source_webdict_sites = {
             \ 'wikipedia:ja': 'http://jp.wikipedia.org/wiki/%s'
             \ }
 
-" バイナリファイル編集時の設定
-augroup Binary
-    autocmd!
-    autocmd BufReadPre  *.bin let &binary = 1
-    autocmd BufReadPost * call BinReadPost()
-    autocmd BufWritePre * call BinWritePre()
-    autocmd BufWritePost * call BinWritePost()
-    function! BinReadPost()
-        if &binary
-            silent %!xxd -g1
-            set ft=xxd
-        endif
-    endfunction
-    function! BinWritePre()
-        if &binary
-            let s:saved_pos = getpos( '.' )
-            silent %!xxd -r
-        endif
-    endfunction
-    function! BinWritePost()
-        if &binary
-            silent %!xxd -g1
-            call setpos( '.', s:saved_pos )
-            set nomod
-        endif
-    endfunction
-augroup END
-" NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
-NeoBundleCheck
+let g:quickrun_config = { 
+    \"python" :{
+    \   "hook/output_encode/enable" : 1,
+    \   "hook/output_encode/encoding" : "utf-8",
+    \}
+\}
+
+autocmd VimEnter * execute 'Vfe'
