@@ -28,7 +28,6 @@ let s:dein_dir = expand('~/.cache/dein')
 " dein.vim 本体
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-set rtp+=~/.cache/dein/repos/github.com/Lokaltog/powerline/powerline/bindings/vim
 " dein.vim がなければ github から落としてくる
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
@@ -81,18 +80,33 @@ let g:neocomplcache_enable_auto_select = 1
 let g:neocomplcache_dictionary_filetype_lists = {
 			\ 'default' : ''
 			\ }
-" powerlineの設定
-" Powerline
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
 
 set laststatus=2
 set showtabline=2
 set noshowmode
-let g:Powerline_symbols = 'fancy'
 set t_Co=256
-let g:Powerline_dividers_override = ['>>', '⮀', '<<', '<']
+
+" powerlineの設定
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component': {
+    \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+    \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+    \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+    \ },
+    \ 'component_visible_condition': {
+    \   'readonly': '(&filetype!="help"&& &readonly)',
+    \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+    \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+    \ },
+    \ 'separator': { 'left': '⮀', 'right': '⮂'},
+    \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" }
+    \}
+
 
 let g:syntastic_mode_map = { 'mode': 'passive' }
 let g:syntastic_python_checkers = ['pyflakes', 'pep8']
