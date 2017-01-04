@@ -50,3 +50,7 @@ repo = 'vim-scripts/Align'
 repo = 'sjl/gundo.vim'
 [[plugins]]
 repo = 'lambdalisue/vim-django-support'
+[[plugins]]
+repo = 'fatih/vim-go'
+[[plugins]]
+repo = 'stephpy/vim-yaml'
