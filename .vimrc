@@ -62,22 +62,22 @@ if dein#check_install()
 endif
 
 
-"neocomplcacheの設定"
+"neocompleteの設定"
 filetype plugin indent on     " required!
 filetype indent on
 syntax on
 
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
+" Use neocomplete.
+let g:neocomplete_enable_at_startup = 1
 " Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
+let g:neocomplete_enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete_min_syntax_length = 3
+let g:neocomplete_lock_buffer_name_pattern = '\*ku\*'
 " 1番目の候補を自動選択
-let g:neocomplcache_enable_auto_select = 1
+let g:neocomplete_enable_auto_select = 1
 "" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
+let g:neocomplete_dictionary_filetype_lists = {
 			\ 'default' : ''
 			\ }
 
@@ -111,8 +111,8 @@ let g:lightline = {
 let g:syntastic_mode_map = { 'mode': 'passive' }
 let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 augroup AutoSyntastic
-	autocmd!
-	autocmd BufWritePost *.c,*.cpp,*.js,*.py,*.rb call s:syntastic()
+    autocmd!
+    autocmd BufWritePost *.c,*.cpp,*.js,*.py,*.rb,*.go call s:syntastic()
 augroup END
 function! s:syntastic()
     SyntasticCheck
@@ -162,30 +162,30 @@ endfunction
  
 
 "" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-	return neocomplcache#smart_close_popup() . "\<CR>"
+	return neocomplete#smart_close_popup() . "\<CR>"
 endfunction
 
 " <TAB> completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" C-nでneocomplcache補完
+" C-nでneocomplete補完
 inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
 " C-pでkeyword補完
 inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
 " 補完候補が表示されている場合は確定。そうでない場合は改行
-inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
+inoremap <expr><CR>  pumvisible() ? neocomplete#close_popup() : "<CR>"
 
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 "vimfilerの設定
 let g:vimfiler_as_default_explorer = 1
@@ -240,4 +240,23 @@ let g:quickrun_config = {
     \}
 \}
 
+" Go lang
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+autocmd FileType go :highlight goErr cterm=bold ctermfg=214
+autocmd FileType go :match goErr /\<err\>/
+" 保存時にビルド自動実行
+autocmd BufWritePost *.go :GoBuild
+hi Search ctermfg=0 ctermbg=11 guibg=Yellow
+
+function! _ErBuild()
+    !eralchemy -i % -o %:r.png
+endfunction
+
+command! ErBuild call _ErBuild()
+autocmd BufWritePost *.er :ErBuild
+
 autocmd VimEnter * execute 'Vfe'
+
+set backspace=indent,eol,start

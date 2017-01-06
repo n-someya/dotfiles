@@ -4,7 +4,7 @@ repo = 'Shougo/vimproc'
 [[plugins]]
 repo = 'Shougo/unite.vim' 
 [[plugins]]
-repo = 'Shougo/neocomplcache.vim' 
+repo = 'Shougo/neocomplete.vim' 
 [[plugins]]
 repo = 'Shougo/neosnippet.vim' 
 [[plugins]]
@@ -54,3 +54,9 @@ repo = 'lambdalisue/vim-django-support'
 repo = 'fatih/vim-go'
 [[plugins]]
 repo = 'stephpy/vim-yaml'
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+[[plugin]]
+repo = 'tomasr/molokai'
